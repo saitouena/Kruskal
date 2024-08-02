@@ -172,6 +172,23 @@ t_{n}^{\phi(\alert{i})} \leqslant_\emb t_{n}^{\phi(\alert{j})}
 \end{proof}
 \end{frame}
 
+\begin{frame}{ステップ３の詳細}
+極小悪列 $\alert{t_0, t_1, \ldots}$
+\vfill
+$T$ の任意の無限列は良列であることを示す
+\begin{enumerate}[(i)]
+\itemsep 0.5em
+    \item 無限列は $t_{j}^{\phi(i)}, \ldots$ の形
+    \item $\alert{t_0, t_1, \ldots, t_{\phi(i)-1}}, t_{j}^{\phi(i)}, \ldots$ は $t_0, t_1, \ldots$ の極小性から良列
+    \item $0 \leqslant k, \ell \leqslant \phi(i)-1$ としてありうるパターンを考えると
+    \begin{itemize}
+        \item $t_k \leqslant_\emb t_\ell$ \lightning
+        \item $t_k \leqslant_\emb t'$ ($t'$ は $t_{j}^{\phi(i)}, \ldots$ から) とすると $t_i \leqslant_\emb t' \leqslant_\emb t_{j'}^{\phi(i')}$ \lightning
+        \item $t_{j'}^{\phi(i')} \leqslant_\emb t_{j''}^{\phi(i'')}$ しかありえない！
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
 \begin{frame}{補足}
 クラスカルの木定理も「タネ」となる順序を取るようにできる
 \begin{prop}[Higman 1952]
