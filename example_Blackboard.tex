@@ -1,0 +1,189 @@
+%%
+%% This is file `example_Blackboard.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% examples_kmbeamer.dtx  (with options: `Blackboard')
+%% Copyright (c) 2011-2013 Kazuki Maeda <kmaeda@users.sourceforge.jp>
+%% 
+%% Distributable under the MIT License:
+%% http://www.opensource.org/licenses/mit-license.php
+%% 
+
+%%% もし pdfTeX や LuaTeX を使うなら dvipdfmx オプションを外す．
+% \documentclass[dvipdfmx]{beamer}
+
+% Modified by LianTze Lim to work with fontspec/xelatex
+\documentclass{beamer}
+\usepackage{xeCJK}
+\setCJKmainfont{IPAPMincho}
+\setCJKsansfont{IPAPGothic}
+
+% You can set fonts for Latin script here
+\setmainfont{FreeSerif}
+\setsansfont{FreeSans}
+\setmonofont{FreeMono}
+
+\usetheme{Blackboard}
+
+%%% もし pTeX + dvipdfmx を使うならば以下のどちらかを環境に合わせてコメントアウト．
+%% \AtBeginDvi{\special{pdf:tounicode EUC-UCS2}} % EUC の場合
+%% \AtBeginDvi{\special{pdf:tounicode 90ms-RKSJ-UCS2}} % SJIS の場合
+
+%%% もし LuaTeX で日本語を出力するなら以下をコメントアウト．
+% \usefonttheme{luatexja}
+% \hypersetup{unicode}
+
+%%% 日本語を使うなら以下を入れると定理環境中のフォントが立体になる．
+%%% 欧文なら不要．
+%%% LLT: Comment out this line if your presentation is in English or other European languages
+\setbeamertemplate{theorems}[normal font]
+
+\newtheorem{prop}{命題}
+\renewcommand\proofname{証明}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{wasysym}
+
+\newcommand{\emb}{\mathsf{emb}}
+\newcommand{\m}[1]{\mathbf{#1}}
+
+\title{WQO入門３ --- クラスカルの木定理}
+\author{齊藤哲平}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}{概要}
+\begin{enumerate}
+\itemsep 2em
+\item WQO の復習
+\item クラスカルの木定理の主張 (項上の埋め込み順序 は WQO)
+\item 証明 (極小悪列論法)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{WQO の復習}
+\begin{definition}
+擬順序 $\leqslant$ を考える
+\begin{itemize}
+    \item 無限列 $a_0, a_1, \ldots$ が\alert{良列}とはある $i < j$ について $a_i \leqslant a_j$ となること \pause
+    \item そうでない無限列 (例えば比較不能列など) は\alert{悪列}と呼ぶ \pause
+    \item $\leqslant$ の悪列が存在しないとき $\leqslant$ を\alert{WQO}と呼ぶ
+\end{itemize}
+\end{definition}
+\pause
+\begin{prop}
+以下は同値
+\begin{itemize}
+\item $\leqslant$ は WQO
+\item $\leqslant$ の任意の拡張 $\leqslant'$ が整礎 (無限降下列 $a_0 >' a_1 >' \cdots$ がない) \pause
+\item 任意の無限列 $a_0, a_1, \ldots$ は単調部分列 $a_{\phi(0)} \leqslant a_{\phi(1)} \leqslant \cdots$ を含む
+\end{itemize}
+\end{prop}
+\pause
+\begin{prop}[Dickson, 1912]
+２つの WQO $\leqslant_A, \leqslant_B$ の積 $\leqslant_{A \times B}$ は WQO
+\end{prop}
+\end{frame}
+
+\begin{frame}{項の埋め込み順序}
+\begin{definition}
+$\Sigma$ を関数記号の集合として、\alert{項}の集合を帰納的に定義
+\begin{itemize}
+    \item 引数が $0$ 個の関数記号 $c$ は項
+    \item $f$ が引数 が $n > 0$ 個の関数記号で $t_1, \ldots, t_n$ が項のとき
+    $f(t_1, \ldots, t_n)$ も項
+\end{itemize}
+また、以下の関係 $\leadsto$ の反射推移閉包を\alert{埋め込み} $\geqslant_\emb$ という
+\[
+f(t_1, \ldots, t_n) \leadsto t_i
+\]
+\end{definition}
+\begin{example}
+$\Sigma = \{ \m{f}^{(2)}, \m{g}^{(1)}, \m{a}^{(0)} \}$ のとき
+\[
+\m{f}(\underline{\m{g}(\m{a})}, \m{f}(\m{a}, \m{a}))
+\geqslant_\emb
+\m{f}(\m{a}, \underline{\m{f}(\m{a}, \m{a})})
+\geqslant_\emb
+\m{f}(\underline{\m{a}}, \m{a})
+\geqslant_\emb
+\m{a}
+\]
+\end{example}
+\end{frame}
+
+\begin{frame}{クラスカルの木定理と極小悪列補題}
+以下、関数記号の集合 $\Sigma$ が有限だと仮定する
+\begin{prop}[Kruskal]
+項の埋め込み関係 $\leqslant_\emb$ は WQO
+\end{prop}
+\vfill
+\pause
+$|t|$ で項 $t$ に現れる関数記号の数（項のサイズ）を表すとする
+\begin{lemma}[極小悪列補題]
+$\leqslant_\emb$ の悪列が存在するならば、以下の\alert{極小悪列} $t_0, t_1, \ldots$ が存在する:
+任意の $i$ について $t_0, \ldots, t_{i-1}, t'$ で始まり $|t'| < |t_i|$ を満たす悪列はない
+\end{lemma}
+\pause
+\vfill
+任意の prefix に関する最小性を満たす悪列 \alert{$t_0, t_1, \ldots$} のこと
+\begin{itemize}
+\item[] ($i = 0$) 悪列 $t'_0, t'_1, \ldots$ で $|t'_0| < |t_0|$ となるものは存在しない \pause
+\item[] ($i = 1$) 悪列 $\alert{t_0}, t'_1, t'_2, \ldots$ で $|t'_1| < |t_1|$ となるものは存在しない \pause
+\item[] ($i = 2$) 悪列 $\alert{t_0, t_1}, t'_2, t'_3,\ldots$ で $|t'_2| < |t_2|$ となるものは存在しない \pause
+\item[] (以下同様)
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{prop}[Kruskal]
+$\leqslant_\emb$ は WQO
+\end{prop}
+\begin{proof}
+$\leqslant_\emb$ の悪列が存在すると仮定して矛盾を導く
+\begin{enumerate}
+\itemsep 0.5em
+\item 極小悪列 $t_0, t_1, \ldots$ をとる
+\item ある関数記号 $f^{(n)}$ ($n > 0$) が頭部に無限回現れる
+\[
+t_{\phi(i)} = f(t_{1}^{\phi(i)}, \ldots, t_{n}^{\phi(i)})
+\]
+\item $T = \{ t_{j}^{\phi(i)} \mid 1 \leqslant j \leqslant n \}$ とすると
+$\leqslant_\emb$ は $T$ 上で WQO 
+
+\item Dickson の補題からある $\alert{i} < \alert{j}$ について
+\[
+t_{1}^{\phi(\alert{i})} \leqslant_\emb t_{1}^{\phi(\alert{j})},
+\quad
+\cdots,
+\quad
+t_{n}^{\phi(\alert{i})} \leqslant_\emb t_{n}^{\phi(\alert{j})}
+\]
+
+\item $t_{\phi(\alert{i})} = f(t_{1}^{\phi(\alert{i})}, \ldots, t_{n}^{\phi(\alert{i})}) \leqslant_\emb f(t_{1}^{\phi(\alert{j})}, \ldots, t_{n}^{\phi(\alert{j})}) = t_{\phi(\alert{j})}$ \lightning
+\end{enumerate}
+\end{proof}
+\end{frame}
+
+\begin{frame}{補足}
+クラスカルの木定理も「タネ」となる順序を取るようにできる
+\begin{prop}[Higman 1952]
+$\leqslant$ が WQO なら $\leqslant_\emb$ も WQO
+\end{prop}
+\vfill
+Knuth「プログラムの停止性解析に応用できないか？」\\
+\pause
+$\leadsto$ Dershowitz の recursive path order
+\end{frame}
+
+\end{document}
+\endinput
+%%
+%% End of file `example_Blackboard.tex'.
