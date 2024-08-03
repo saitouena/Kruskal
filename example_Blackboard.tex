@@ -151,12 +151,13 @@ $\leqslant_\emb$ の悪列が存在すると仮定して矛盾を導く
 \begin{enumerate}
 \itemsep 0.5em
 \item 極小悪列 $t_0, t_1, \ldots$ をとる
+\item 
+\alert{$\leqslant_\emb$ は $T = \bigcup_i T_i$ 上で WQO} ($T_i$ は $t_i$ の引数の集合)
+
 \item ある関数記号 $f^{(n)}$ ($n > 0$) が頭部に無限回現れる
 \[
 t_{\phi(i)} = f(t_{1}^{\phi(i)}, \ldots, t_{n}^{\phi(i)})
 \]
-\item $T = \{ t_{j}^{\phi(i)} \mid 1 \leqslant j \leqslant n \}$ とすると
-$\leqslant_\emb$ は $T$ 上で WQO 
 
 \item Dickson の補題からある $\alert{i} < \alert{j}$ について
 \[
@@ -172,21 +173,24 @@ t_{n}^{\phi(\alert{i})} \leqslant_\emb t_{n}^{\phi(\alert{j})}
 \end{proof}
 \end{frame}
 
-\begin{frame}{ステップ３の詳細}
-極小悪列 $\alert{t_0, t_1, \ldots}$
+\begin{frame}{ステップ２の詳細}
+\begin{itemize}
+    \item 極小悪列 $\alert{t_0, t_1, \ldots}$
+    \item $T = \bigcup_i T_i$ ($T_i$ は $t_i$ の引数の集合)
+    \item $t'_0, t'_1, \ldots$ は $T$ の悪列
+    \item $t'_0$ は $t_k$ の引数である
+    \item 十分大きい $N \geqslant k$: 任意の $i \geqslant N$ について $t'_i \notin T_1 \cup \cdots \cup T_k$ 
+\end{itemize}
 \vfill
-$T$ の任意の無限列は良列であることを示す
-\begin{enumerate}[(i)]
+$\alert{t_0, t_1, \ldots, t_{k-1}}, t'_0, t'_{N}, t'_{N+1}, \ldots$ は良列; いずれの場合も矛盾 \lightning
+\begin{itemize}
 \itemsep 0.5em
-    \item 無限列は $t_{j}^{\phi(i)}, \ldots$ の形
-    \item $\alert{t_0, t_1, \ldots, t_{\phi(i)-1}}, t_{j}^{\phi(i)}, \ldots$ は $t_0, t_1, \ldots$ の極小性から良列
-    \item $0 \leqslant k, \ell \leqslant \phi(i)-1$ としてありうるパターンを考えると
-    \begin{itemize}
-        \item $t_k \leqslant_\emb t_\ell$ \lightning
-        \item $t_k \leqslant_\emb t'$ ($t'$ は $t_{j}^{\phi(i)}, \ldots$ から) とすると $t_i \leqslant_\emb t' \leqslant_\emb t_{j'}^{\phi(i')}$ \lightning
-        \item $t_{j'}^{\phi(i')} \leqslant_\emb t_{j''}^{\phi(i'')}$ しかありえない！
-    \end{itemize}
-\end{enumerate}
+\item $t_i \leqslant_\emb t_j$ \lightning
+\item $t_i \leqslant_\emb t'_0 \leqslant_\emb t_0 \;  \Longrightarrow \; i = 0 \; \Longrightarrow \; t_0 \leqslant_\emb t'_0$  \lightning
+\item $t_i \leqslant_\emb t'_{N+j} \leqslant_\emb t_{N+j}$ \lightning
+\item $t'_0 \leqslant t'_{N+j} $ \lightning
+\item $t'_{N+j} \leqslant t'_{N+j'} $ \lightning
+\end{itemize}
 \end{frame}
 
 \begin{frame}{補足}
